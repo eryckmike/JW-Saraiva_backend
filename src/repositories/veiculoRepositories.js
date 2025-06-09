@@ -14,3 +14,10 @@ export function addVeiculo( placa, id, cor, categoria ) {
 export async function deleteVeiculo(id) {
   return prisma.veiculo.delete({ where: { id } })
 }
+
+export async function updateVeiculo(id, cor, categoria) {
+  return prisma.veiculo.update({
+    where: { id },
+    data: { cor, categoria }
+  })
+}

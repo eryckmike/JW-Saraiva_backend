@@ -1,13 +1,22 @@
 import * as veiculoService from '../services/veiculoService.js'
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
 
 export async function getAllVeiculo(req, res) {
   try {
-    const veiculo = await veiculoService.getAllVeiculo()
-    return res.json(veiculo)
+    const { placa } = req.query;
+    const filtro = placa
+      ? { where: { placa: { contains: String(placa), mode: 'insensitive' } } }
+      : {};
+    const veiculos = await prisma.veiculo.findMany(filtro);
+    return res.json(veiculos);
   } catch (err) {
-    return res.status(500).json({ error: 'Erro ao buscar usuários' })
+  console.error('[VeiculoService] erro em findAll:', err);
+  throw err;
   }
 }
+
 
 export async function addVeiculo(req, res) {
   try {
@@ -29,8 +38,25 @@ export async function deleteVeiculo(req, res) {
   }
 }
 
+export async function updateVeiculo(req, res) {
+  const { id } = req.params;
+  const { cor, categoria } = req.body;
+
+  try {
+    const atualizado = await prisma.veiculo.update({
+      where: { id: Number(id) },
+      data: { cor, categoria }
+    });
+    return res.json(atualizado);
+  } catch (err) {
+    console.error('Erro ao atualizar veículo:', err);
+    return res.status(500).json({ error: 'Erro ao atualizar veículo' });
+  }
+}
+
 export default {
   getAllVeiculo,
   addVeiculo,
-  deleteVeiculo
+  deleteVeiculo,
+  updateVeiculo
 }
