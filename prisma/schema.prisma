@@ -32,13 +32,29 @@ model Motorista {
   email          String   @unique
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  viagens        Viagem[]
 }
 
 model Veiculo {
-  id          Int      @id @default(autoincrement())
-  placa       String   @unique
-  cor         String
-  categoria   String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  placa     String   @unique
+  cor       String
+  categoria String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  viagens   Viagem[]
+}
+
+model Viagem {
+  id          Int       @id @default(autoincrement())
+  dataSaida   DateTime
+  dataVolta   DateTime
+  origem      String
+  destino     String
+  veiculo     Veiculo   @relation(fields: [veiculoId], references: [id])
+  veiculoId   Int
+  motorista   Motorista @relation(fields: [motoristaId], references: [id])
+  motoristaId Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
