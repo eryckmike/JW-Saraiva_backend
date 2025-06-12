@@ -36,13 +36,14 @@ model Motorista {
 }
 
 model Veiculo {
-  id        Int      @id @default(autoincrement())
-  placa     String   @unique
-  cor       String
-  categoria String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  viagens   Viagem[]
+  id          Int          @id @default(autoincrement())
+  placa       String       @unique
+  cor         String
+  categoria   String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  viagens     Viagem[]
+  manutencoes Manutencao[]
 }
 
 model Viagem {
@@ -57,4 +58,17 @@ model Viagem {
   motoristaId Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model Manutencao {
+  id               Int      @id @default(autoincrement())
+  dataEntrada      DateTime
+  dataSaidaEstimad DateTime
+  motivo           String
+
+  veiculo   Veiculo @relation(fields: [veiculoId], references: [id])
+  veiculoId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
