@@ -4,10 +4,10 @@ export class Manutencao {
     this.dataEntrada       = dataEntrada
     this.dataSaidaEstimad  = dataSaidaEstimad
     this.motivo            = motivo
-    this.veiculo           = veiculo // { id, nome, codigo, placa }
+    this.veiculo           = veiculo 
   }
 
-  /** fábrica que garante campos mínimos */
+  
   static agendar({ dataEntrada, dataSaidaEstimad, motivo, veiculo }) {
     return new Manutencao({
       dataEntrada:      new Date(dataEntrada),

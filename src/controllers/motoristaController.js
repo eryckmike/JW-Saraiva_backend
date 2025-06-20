@@ -29,8 +29,21 @@ export async function deleteMotorista(req, res) {
   }
 }
 
+export async function updateMotorista(req, res) {
+  try {
+    const { id } = req.params
+    const dados  = req.body
+    const atualizado = await motoristaService.updateMotorista(id, dados)
+    return res.json(atualizado)
+  } catch (err) {
+    console.error('Erro ao atualizar motorista:', err)
+    return res.status(500).json({ error: 'Não foi possível atualizar motorista.' })
+  }
+}
+
 export default {
   getAllMotorista,
   addMotorista,
-  deleteMotorista
+  deleteMotorista,
+  updateMotorista
 }

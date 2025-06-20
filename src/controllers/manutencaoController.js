@@ -20,7 +20,6 @@ export async function postManutencao(req, res) {
     res.status(201).json(m)
   } catch (err) {
     console.error('Erro ao criar manutenção:', err)
-    // tratar FK violation se veiculoId inválido
     if (err.code === 'P2003') {
       return res.status(400).json({ erro: 'veiculoId inválido.' })
     }

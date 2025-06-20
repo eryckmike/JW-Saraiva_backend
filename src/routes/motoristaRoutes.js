@@ -4,7 +4,9 @@ import motoristaController from '../controllers/motoristaController.js'
 
 const router = Router()
 
-router.get('/',      motoristaController.getAllMotorista)
-router.post('/',     motoristaController.addMotorista)
+router.get('/',       motoristaController.getAllMotorista)
+router.post('/',      motoristaController.addMotorista)
+router.put('/:id',    motoristaController.updateMotorista)
 router.delete('/:id', motoristaController.deleteMotorista)
+
 export default router

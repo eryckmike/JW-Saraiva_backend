@@ -1,7 +1,6 @@
 import prisma from '../prismaClient.js'
 import { Viagem } from '../models/viagemModel.js'
 
-/** busca todas as viagens com dados de veículo e motorista */
 export async function getAllViagens() {
   const regs = await prisma.viagem.findMany({
     include: { veiculo: true, motorista: true },
@@ -19,7 +18,7 @@ export async function getAllViagens() {
   }))
 }
 
-/** cria uma nova viagem (o +30 dias já pode estar no domínio ou aqui) */
+
 export function addViagem(dataSaida, veiculoId, motoristaId, origem, destino) {
   const ds = new Date(dataSaida)
   const dv = new Date(ds.getTime() + 30*24*60*60*1000)

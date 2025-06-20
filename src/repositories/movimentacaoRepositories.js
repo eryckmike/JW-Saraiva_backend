@@ -22,7 +22,7 @@ export async function getAllMovimentacoes() {
       motorista:     v.motorista.nome
     })
 
-    // Registro de entrada (retorno)
+    
     registros.push({
       id:      v.id * 2 + 1,
       data:    v.dataVolta.toISOString().split('T')[0],
@@ -33,7 +33,7 @@ export async function getAllMovimentacoes() {
     })
   })
 
-  // Ordena do mais recente para o mais antigo
+
   registros.sort((a, b) => {
     const dta = new Date(`${a.data}T${a.horario}:00`)
     const dtb = new Date(`${b.data}T${b.horario}:00`)

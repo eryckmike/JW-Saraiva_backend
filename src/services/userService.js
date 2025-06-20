@@ -1,4 +1,4 @@
-// src/services/userService.js
+
 import * as userRepo from '../repositories/userRepositories.js'
 
 export function getAllUsers() {

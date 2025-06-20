@@ -1,8 +1,10 @@
-import { Router } from 'express'
-import { listarViagens, criarViagem } from '../controllers/viagemController.js'
+import { Router } from 'express';
+import * as viagemController from '../controllers/viagemController.js';
 
-const router = Router()
-router.get('/',    listarViagens)
-router.post('/',   criarViagem)
+const router = Router();
 
-export default router
+router.get   ('/',        viagemController.getAllViagens);
+router.post  ('/',        viagemController.createViagem);
+router.delete('/:id',    viagemController.deleteViagem);
+
+export default router;

@@ -4,20 +4,20 @@ export class Viagem {
     this.id         = id
     this.dataSaida  = dataSaida
     this.dataVolta  = dataVolta
-    this.origem     = origem     // { id, nome, … }
-    this.destino    = destino    // { id, nome, … }
-    this.veiculo    = veiculo    // { id, placa, … }
-    this.motorista  = motorista  // { id, nome, email, … }
+    this.origem     = origem    
+    this.destino    = destino    
+    this.veiculo    = veiculo    
+    this.motorista  = motorista  
   }
 
-  /** fábricar com +30 dias automático */
+  
   static agendar({ dataSaida, veiculo, motorista }) {
     const ds = new Date(dataSaida)
     const dv = new Date(ds.getTime() + 30*24*60*60*1000)
     return new Viagem({ dataSaida: ds, dataVolta: dv, origem: "", destino: "", veiculo, motorista })
   }
 
-  /** retorna { dias, horas, minutos } até dataVolta */
+  
   tempoRestante() {
     const diff = this.dataVolta.getTime() - Date.now()
     return {
@@ -27,7 +27,7 @@ export class Viagem {
     }
   }
 
-  /** sinaliza alerta se faltar ≤ antesDeDias */
+  
   precisaAlerta(antesDeDias = 3) {
     return this.tempoRestante().dias <= antesDeDias
   }
